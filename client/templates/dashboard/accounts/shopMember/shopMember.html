@@ -1,0 +1,41 @@
+<template name="shopMember">
+<div class="col-sm-2 shop-member-profile">
+  {{> avatar user=this size="large" shape="circle"}}
+  {{displayName this}}
+  {{email}}
+  {{#if hasOwnerAccess}}
+  <a class="link-shop-member-remove" data-confirm="Are you sure you want to remove all permissions?">
+    <i class="fa fa-eraser"></i>
+  </a>
+  {{/if}}
+</div>
+
+<div class="col-xs-12 col-sm-10 shop-member-permissions">
+  {{#each permissionGroups}}
+    <div class="panel panel-default col-xs-6 col-sm-2">
+      <div class="panel-heading">
+        <label>
+          <input type="checkbox" {{isChecked name ../../userId}}
+                 class="toggle-shop-member-permission"
+                 data-userId="{{../../userId}}" data-permission="{{name}}"/>
+          {{name}}
+        </label>
+
+      </div>
+      <ul class="list-group">
+          {{#each permissions}}
+            <li>
+              <label>
+                <input type="checkbox" {{isChecked permission ../../userId}}
+                       class="toggle-shop-member-permission"
+                       data-userId="{{../../userId}}" data-permission="{{permission}}"/>
+                {{label}}
+              </label>
+            </li>
+          {{/each}}
+      </ul>
+    </div>
+  {{/each}}
+</div>
+
+</template>
